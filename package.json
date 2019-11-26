@@ -1,6 +1,6 @@
 {
   "name": "lz-deflate",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Encode and decode strings according to the deflate specification (RFC 1951) for LZ77 (Lempel-Ziv 1977) coding. This implements the 'patent free' algorithm described there for 'lazy matching'. This package is not optimized for speed or efficiency and is primarily for educational purposes.",
   "main": "LZ.js",
   "scripts": {

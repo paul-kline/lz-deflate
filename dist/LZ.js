@@ -28,12 +28,21 @@ class LZ {
         // this.frequencyMap = frequencies(message);
         // this.tokens = this.lz();
     }
+    /**
+     * the token array: every element is either a Literal or Match
+     */
     get tokens() {
         if (!this._tokens) {
             this._tokens = this.lz();
         }
         return this._tokens;
     }
+    /**
+     *
+     * @param message the message to decode. Assumed in string form "a<1,5>" which would decode to "aaaaaa"
+     *
+     * updates encodedMessage property to message, tokens, and decodedMessage
+     */
     decodeString(message) {
         this.encodedMessage = message;
         this.decodedMessage = this.decodeTokens(toTokens(message));
@@ -62,6 +71,12 @@ class LZ {
         });
         return r.join("");
     }
+    /**
+     *
+     * @param message string to encode. For example, "aaaaaab" will become "a<1,5>b"
+     *
+     * updates decodedMessage,  encodedMessage, and tokens
+     */
     encodeString(message) {
         this.decodedMessage = message;
         this._tokens = this.lz();
@@ -166,7 +181,6 @@ function toTokens(str) {
     }
     return r;
 }
-exports.toTokens = toTokens;
 function matchLength(arr, i1, i2) {
     let i = 0;
     while (arr[i1 + i] == arr[i2 + i]) {
@@ -198,13 +212,4 @@ function insert(triplet, dic, i) {
     const s = dic.get(triplet) || new Set();
     s.add(i);
     dic.set(triplet, s);
-}
-function frequencies(message) {
-    const ls = message.split("");
-    const dic = new Map();
-    ls.forEach((x, i) => {
-        const e = dic.get(x) || 0;
-        dic.set(x, e + 1);
-    });
-    return dic;
 }
